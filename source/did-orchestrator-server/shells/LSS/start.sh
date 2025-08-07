@@ -22,4 +22,4 @@ nohup java -jar "$JAR_FILE" --server.port="$PORT" > "$LOG_FILE" 2>&1 &
 echo "Server on port $PORT started"
 echo "Logging to: $LOG_FILE"
 # Run easy-adoption injector
-sh "$SCRIPT_DIR/easy-adoption-injector.sh" "$SERVER_IP"
+bash "$SCRIPT_DIR/easy-adoption-injector.sh" "$SERVER_IP"

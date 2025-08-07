@@ -10,7 +10,7 @@ ISSUER_DIR="$(pwd)/Issuer"
 
 echo "Resetting Besu environment..."
 
-docker-compose down -v
+docker compose down -v
 
 if [ -d "$CONTRACT_DIR" ]; then
     echo "Deleting contract directory: $CONTRACT_DIR"

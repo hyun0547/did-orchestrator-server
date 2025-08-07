@@ -15,7 +15,7 @@ missing_db=0
 for db in "${DB_NAMES[@]}"; do
     result=$(docker exec -i "postgre-opendid" psql -h localhost -p 5432 -U "$DB_USER" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='$db';")
 
-    if [ "$result" == "1" ]; then
+    if [ "$result" = "1" ]; then
         echo "Database '$db' exists."
     else
         echo "Database '$db' is missing."

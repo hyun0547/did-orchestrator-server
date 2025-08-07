@@ -10,7 +10,7 @@ export POSTGRES_USER
 export POSTGRES_PASSWORD
 export POSTGRES_DB
 
-docker-compose up -d
+docker compose up -d
 
 echo "Waiting for database to be ready..."
 

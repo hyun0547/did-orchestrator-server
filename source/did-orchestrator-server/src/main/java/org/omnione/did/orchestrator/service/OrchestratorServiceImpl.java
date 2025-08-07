@@ -232,7 +232,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
             chmodBuilder.start().waitFor();
             System.out.println("besu start : " + blockChainProperties.getBesu().getChainId());
             ProcessBuilder builder = new ProcessBuilder(
-                "sh", "-c", "nohup " + besuShellPath + "/start.sh "  + getServerIp() +
+                "bash", "-c", "nohup " + besuShellPath + "/start.sh "  + getServerIp() +
                 " > " + logFilePath + " 2>&1 &"
             );
 
@@ -270,7 +270,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         log.info("requestShutdownBesu");
         try {
             String besuShellPath = System.getProperty("user.dir") + "/shells/Besu";
-            ProcessBuilder builder = new ProcessBuilder("sh", besuShellPath + "/stop.sh");
+            ProcessBuilder builder = new ProcessBuilder("bash", besuShellPath + "/stop.sh");
             builder.directory(new File(besuShellPath));
             builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
             builder.redirectError(ProcessBuilder.Redirect.INHERIT);
@@ -295,7 +295,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         OrchestratorResponseDto response = new OrchestratorResponseDto();
         try {
             String besuShellPath = System.getProperty("user.dir") + "/shells/Besu";
-            ProcessBuilder builder = new ProcessBuilder("sh", besuShellPath + "/status.sh", "besu.dat");
+            ProcessBuilder builder = new ProcessBuilder("bash", besuShellPath + "/status.sh", "besu.dat");
             builder.directory(new File(besuShellPath));
             Process process = builder.start();
             String output = getProcessOutput(process);
@@ -323,7 +323,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         OrchestratorResponseDto response = new OrchestratorResponseDto();
         try {
             String besuShellPath = System.getProperty("user.dir") + "/shells/Besu";
-            ProcessBuilder builder = new ProcessBuilder("sh", besuShellPath + "/reset.sh");
+            ProcessBuilder builder = new ProcessBuilder("bash", besuShellPath + "/reset.sh");
             builder.directory(new File(besuShellPath));
             Process process = builder.start();
             String output = getProcessOutput(process);
@@ -437,7 +437,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
             File scriptFile = new File(System.getProperty("user.dir") + "/shells/LSS/start.sh");
 
             List<String> command = new ArrayList<>();
-            command.add("sh");
+            command.add("bash");
             command.add(scriptFile.getAbsolutePath());
             command.add(jarFile.getAbsolutePath());
             command.add(port);
@@ -605,7 +605,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
             String postgreShellPath = System.getProperty("user.dir") + "/shells/Postgre/start.sh";
             File logFile = new File(logFilePath);
 
-            ProcessBuilder builder = new ProcessBuilder("sh", postgreShellPath,
+            ProcessBuilder builder = new ProcessBuilder("bash", postgreShellPath,
                 String.valueOf(databaseProperties.getPort()),
                 databaseProperties.getUser(),
                 databaseProperties.getPassword(),
@@ -640,7 +640,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         OrchestratorResponseDto response = new OrchestratorResponseDto();
         try {
             String postgreShellPath = System.getProperty("user.dir") + "/shells/Postgre";
-            ProcessBuilder builder = new ProcessBuilder("sh", postgreShellPath + "/stop.sh");
+            ProcessBuilder builder = new ProcessBuilder("bash", postgreShellPath + "/stop.sh");
             builder.directory(new File(postgreShellPath));
 
             Process process = builder.start();
@@ -668,7 +668,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         OrchestratorResponseDto response = new OrchestratorResponseDto();
         try {
             String postgreShellPath = System.getProperty("user.dir") + "/shells/Postgre";
-            ProcessBuilder builder = new ProcessBuilder("sh", postgreShellPath + "/status.sh", databaseProperties.getUser(), databaseProperties.getPassword());
+            ProcessBuilder builder = new ProcessBuilder("bash", postgreShellPath + "/status.sh", databaseProperties.getUser(), databaseProperties.getPassword());
             builder.directory(new File(postgreShellPath));
 
             Process process = builder.start();
@@ -701,7 +701,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         Process process = null;
 
         try {
-            ProcessBuilder builder = new ProcessBuilder("sh", CLI_TOOL_DIR + "/create_all.sh", password);
+            ProcessBuilder builder = new ProcessBuilder("bash", CLI_TOOL_DIR + "/create_all.sh", password);
             builder.directory(new File(CLI_TOOL_DIR));
             builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
             builder.redirectError(ProcessBuilder.Redirect.INHERIT);
@@ -750,7 +750,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
 
         try {
 
-            ProcessBuilder builder = new ProcessBuilder("sh", CLI_TOOL_DIR + "/create_wallet.sh", fileName);
+            ProcessBuilder builder = new ProcessBuilder("bash", CLI_TOOL_DIR + "/create_wallet.sh", fileName);
             builder.directory(new File(CLI_TOOL_DIR));
             // Use PIPE instead of INHERIT to capture output
             builder.redirectOutput(ProcessBuilder.Redirect.PIPE);
@@ -873,7 +873,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         for(int i = 0; i < keyIds.size(); i++) {
             try {
                 log.debug("createKeys : " + fileName + " / " + password + " / " + keyIds.get(i));
-                ProcessBuilder builder = new ProcessBuilder("sh", CLI_TOOL_DIR + "/create_keys.sh", fileName + ".wallet", keyIds.get(i));
+                ProcessBuilder builder = new ProcessBuilder("bash", CLI_TOOL_DIR + "/create_keys.sh", fileName + ".wallet", keyIds.get(i));
                 builder.directory(new File(CLI_TOOL_DIR));
                 // Use PIPE instead of INHERIT to capture output
                 builder.redirectOutput(ProcessBuilder.Redirect.PIPE);
@@ -999,7 +999,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         BufferedReader errorReader = null;
 
         try {
-            ProcessBuilder builder = new ProcessBuilder("sh", CLI_TOOL_DIR + "/create_did_doc.sh", fileName + ".wallet", fileName + ".did", did, controller, type);
+            ProcessBuilder builder = new ProcessBuilder("bash", CLI_TOOL_DIR + "/create_did_doc.sh", fileName + ".wallet", fileName + ".did", did, controller, type);
             builder.directory(new File(CLI_TOOL_DIR));
             // Use PIPE instead of INHERIT to capture output
             builder.redirectOutput(ProcessBuilder.Redirect.PIPE);
@@ -1227,7 +1227,7 @@ public class OrchestratorServiceImpl implements OrchestratorService{
         }
 
         List<String> command = new ArrayList<>();
-        command.add("sh");
+        command.add("bash");
         command.add(scriptFile.getAbsolutePath());
         command.add(jarFile.getAbsolutePath());
         command.add(port);

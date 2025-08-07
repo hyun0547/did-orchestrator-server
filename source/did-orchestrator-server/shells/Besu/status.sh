@@ -29,7 +29,7 @@ RESULT=$(echo "$RESPONSE" | jq -r '.result')
 
 echo "Status result: $RESULT"
 
-if [ "$RESULT" == "0x" ]; then
+if [ "$RESULT" = "0x" ]; then
     echo "Deployment failed (0): Contract code is empty ($CONTRACT_ADDRESS)"
     exit 0
 else

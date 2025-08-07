@@ -60,7 +60,7 @@ if [ ! -f "$STATUS_SCRIPT_PATH" ]; then
 fi
 
 echo "Checking contract deployment status..."
-command="sh $STATUS_SCRIPT_PATH $ACCOUNT_INFO_PATH"
+command="bash $STATUS_SCRIPT_PATH $ACCOUNT_INFO_PATH"
 eval $command
 
 if [ $? -eq 200 ]; then
@@ -70,7 +70,7 @@ else
 
     # Run make-account-with-regist-role.js which handles everything
     echo "Hardhat: Deploying contracts and creating accounts with roles..."
-    DEPLOY_OUTPUT=$(npx hardhat run scripts/deploy-and-make-account-with-regist-role.js --network dev)
+    DEPLOY_OUTPUT=$(npx hardhat run scripts/deploy-and-make-account-with-regist-role.js)
 
     echo "$DEPLOY_OUTPUT"
 
@@ -154,4 +154,4 @@ echo "- TAS: $TA_BLOCKCHAIN_PATH"
 echo "- Issuer: $ISSUER_BLOCKCHAIN_PATH"
 
 # Run easy-adoption injector
-sh easy-adoption-injector.sh $SERVER_IP
+bash easy-adoption-injector.sh $SERVER_IP
