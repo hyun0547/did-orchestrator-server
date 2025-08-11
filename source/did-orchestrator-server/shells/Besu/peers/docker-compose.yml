@@ -1,0 +1,138 @@
+services:
+  validator1:
+    image: hyperledger/besu:latest
+    command: [ "--config-file=/opt/besu/common-config.toml",
+               "--identity=validator1",
+               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
+               "--p2p-host=10.42.0.3",
+               "--p2p-port=30304" ]
+    volumes:
+      - ./common-config.toml:/opt/besu/common-config.toml:ro
+      - ./genesis.json:/opt/besu/genesis.json:ro
+      - ./keys/validator1/key:/opt/besu/key:ro
+      - validator1-data:/opt/besu/data
+    ports:
+      - "8547:8545"
+      - "30304:30304/tcp"
+      - "30304:30304/udp"
+    networks:
+      qbft_testnet:
+        ipv4_address: 10.42.0.3
+
+  validator2:
+    image: hyperledger/besu:latest
+    command: [ "--config-file=/opt/besu/common-config.toml",
+               "--identity=validator2",
+               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
+               "--p2p-host=10.42.0.4",
+               "--p2p-port=30305" ]
+    volumes:
+      - ./common-config.toml:/opt/besu/common-config.toml:ro
+      - ./genesis.json:/opt/besu/genesis.json:ro
+      - ./keys/validator2/key:/opt/besu/key:ro
+      - validator2-data:/opt/besu/data
+    ports:
+      - "8548:8545"
+      - "30305:30305/tcp"
+      - "30305:30305/udp"
+    networks:
+      qbft_testnet:
+        ipv4_address: 10.42.0.4
+
+  validator3:
+    image: hyperledger/besu:latest
+    command: [ "--config-file=/opt/besu/common-config.toml",
+               "--identity=validator3",
+               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
+               "--p2p-host=10.42.0.5",
+               "--p2p-port=30306" ]
+    volumes:
+      - ./common-config.toml:/opt/besu/common-config.toml:ro
+      - ./genesis.json:/opt/besu/genesis.json:ro
+      - ./keys/validator3/key:/opt/besu/key:ro
+      - validator3-data:/opt/besu/data
+    ports:
+      - "8549:8545"
+      - "30306:30306/tcp"
+      - "30306:30306/udp"
+    networks:
+      qbft_testnet:
+        ipv4_address: 10.42.0.5
+  
+  validator4:
+    image: hyperledger/besu:latest
+    command: [ "--config-file=/opt/besu/common-config.toml",
+               "--identity=validator4",
+               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
+               "--p2p-host=10.42.0.6",
+               "--p2p-port=30307" ]
+    volumes:
+      - ./common-config.toml:/opt/besu/common-config.toml:ro
+      - ./genesis.json:/opt/besu/genesis.json:ro
+      - ./keys/validator4/key:/opt/besu/key:ro
+      - validator4-data:/opt/besu/data
+    ports:
+      - "8560:8545"
+      - "30307:30307/tcp"
+      - "30307:30307/udp"
+    networks:
+      qbft_testnet:
+        ipv4_address: 10.42.0.6
+  
+  validator5:
+    image: hyperledger/besu:latest
+    command: [ "--config-file=/opt/besu/common-config.toml",
+               "--identity=validator5",
+               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
+               "--p2p-host=10.42.0.7",
+               "--p2p-port=30308" ]
+    volumes:
+      - ./common-config.toml:/opt/besu/common-config.toml:ro
+      - ./genesis.json:/opt/besu/genesis.json:ro
+      - ./keys/validator5/key:/opt/besu/key:ro
+      - validator5-data:/opt/besu/data
+    ports:
+      - "8561:8545"
+      - "30308:30308/tcp"
+      - "30308:30308/udp"
+    networks:
+      qbft_testnet:
+        ipv4_address: 10.42.0.7
+
+networks:
+  qbft_testnet:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.42.0.0/16
+          gateway: 10.42.0.1
+
+volumes:
+  validator1-data:
+    driver_opts:
+      type: "local"
+      o: "bind,nolock,soft,rw,uid=1000,gid=1000"
+      device: $PWD/${VALIDATOR1_DATA_PATH}
+  validator2-data:
+    driver_opts:
+      type: "local"
+      o: "bind,nolock,soft,rw,uid=1000,gid=1000"
+      device: $PWD/${VALIDATOR2_DATA_PATH}
+  validator3-data:
+    driver_opts:
+      type: "local"
+      o: "bind,nolock,soft,rw,uid=1000,gid=1000"
+      device: $PWD/${VALIDATOR3_DATA_PATH}
+  validator4-data:
+    driver_opts:
+      type: "local"
+      o: "bind,nolock,soft,rw,uid=1000,gid=1000"
+      device: $PWD/${VALIDATOR4_DATA_PATH}
+  validator5-data:
+    driver_opts:
+      type: "local"
+      o: "bind,nolock,soft,rw,uid=1000,gid=1000"
+      device: $PWD/${VALIDATOR5_DATA_PATH}
