@@ -70,7 +70,7 @@ else
 
     # Run make-account-with-regist-role.js which handles everything
     echo "Hardhat: Deploying contracts and creating accounts with roles..."
-    DEPLOY_OUTPUT=$(npx hardhat run scripts/deploy-and-make-account-with-regist-role.js)
+    DEPLOY_OUTPUT=$(npx hardhat run scripts/deploy-and-make-account-with-regist-role.js --network dev)
 
     echo "$DEPLOY_OUTPUT"
 
