@@ -3,8 +3,9 @@ services:
     image: hyperledger/besu:latest
     command: [ "--config-file=/opt/besu/common-config.toml",
                "--identity=validator1",
-               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
-               "--p2p-host=10.42.0.3",
+               "--bootnodes=enode://b842e9c9d013b064d933e6e13667911b6750988681c21a28c6a14a3844c1d6e325cc48dfc780ff9b6d73ffa0f6ff982a9ddc961b0af2af21926d4788e77a0847@172.26.0.2:30303",
+               "--nat-method=DOCKER",
+               "--min-gas-price=0",
                "--p2p-port=30304" ]
     volumes:
       - ./common-config.toml:/opt/besu/common-config.toml:ro
@@ -16,15 +17,15 @@ services:
       - "30304:30304/tcp"
       - "30304:30304/udp"
     networks:
-      qbft_testnet:
-        ipv4_address: 10.42.0.3
+      besu:
 
   validator2:
     image: hyperledger/besu:latest
     command: [ "--config-file=/opt/besu/common-config.toml",
                "--identity=validator2",
-               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
-               "--p2p-host=10.42.0.4",
+               "--bootnodes=enode://b842e9c9d013b064d933e6e13667911b6750988681c21a28c6a14a3844c1d6e325cc48dfc780ff9b6d73ffa0f6ff982a9ddc961b0af2af21926d4788e77a0847@172.26.0.2:30303",
+               "--nat-method=DOCKER",
+               "--min-gas-price=0",
                "--p2p-port=30305" ]
     volumes:
       - ./common-config.toml:/opt/besu/common-config.toml:ro
@@ -36,15 +37,15 @@ services:
       - "30305:30305/tcp"
       - "30305:30305/udp"
     networks:
-      qbft_testnet:
-        ipv4_address: 10.42.0.4
+      besu:
 
   validator3:
     image: hyperledger/besu:latest
     command: [ "--config-file=/opt/besu/common-config.toml",
                "--identity=validator3",
-               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
-               "--p2p-host=10.42.0.5",
+               "--bootnodes=enode://b842e9c9d013b064d933e6e13667911b6750988681c21a28c6a14a3844c1d6e325cc48dfc780ff9b6d73ffa0f6ff982a9ddc961b0af2af21926d4788e77a0847@172.26.0.2:30303",
+               "--nat-method=DOCKER",
+               "--min-gas-price=0",
                "--p2p-port=30306" ]
     volumes:
       - ./common-config.toml:/opt/besu/common-config.toml:ro
@@ -56,15 +57,15 @@ services:
       - "30306:30306/tcp"
       - "30306:30306/udp"
     networks:
-      qbft_testnet:
-        ipv4_address: 10.42.0.5
+      besu:
   
   validator4:
     image: hyperledger/besu:latest
     command: [ "--config-file=/opt/besu/common-config.toml",
                "--identity=validator4",
-               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
-               "--p2p-host=10.42.0.6",
+               "--bootnodes=enode://b842e9c9d013b064d933e6e13667911b6750988681c21a28c6a14a3844c1d6e325cc48dfc780ff9b6d73ffa0f6ff982a9ddc961b0af2af21926d4788e77a0847@172.26.0.2:30303",
+               "--nat-method=DOCKER",
+               "--min-gas-price=0",
                "--p2p-port=30307" ]
     volumes:
       - ./common-config.toml:/opt/besu/common-config.toml:ro
@@ -76,15 +77,15 @@ services:
       - "30307:30307/tcp"
       - "30307:30307/udp"
     networks:
-      qbft_testnet:
-        ipv4_address: 10.42.0.6
+      besu:
   
   validator5:
     image: hyperledger/besu:latest
     command: [ "--config-file=/opt/besu/common-config.toml",
                "--identity=validator5",
-               "--bootnodes=enode://9a0fa6602363c6bcb00b2d09812f2e3a5d7b60f8c61692b0988242ab382cc1191e5c939a000bb0b7399095122c5efcd9cf936b5b3dde735322e2f9855c4f7f25@10.42.0.2:30303",
-               "--p2p-host=10.42.0.7",
+               "--bootnodes=enode://b842e9c9d013b064d933e6e13667911b6750988681c21a28c6a14a3844c1d6e325cc48dfc780ff9b6d73ffa0f6ff982a9ddc961b0af2af21926d4788e77a0847@172.26.0.2:30303",
+               "--nat-method=DOCKER",
+               "--min-gas-price=0",
                "--p2p-port=30308" ]
     volumes:
       - ./common-config.toml:/opt/besu/common-config.toml:ro
@@ -96,19 +97,12 @@ services:
       - "30308:30308/tcp"
       - "30308:30308/udp"
     networks:
-      qbft_testnet:
-        ipv4_address: 10.42.0.7
+      besu:
 
 networks:
-  qbft_testnet:
-    driver: bridge
-    driver_opts:
-      com.docker.network.enable_ipv6: "false"
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.42.0.0/16
-          gateway: 10.42.0.1
+  besu:
+    external: true
+    name: besu
 
 volumes:
   validator1-data:
