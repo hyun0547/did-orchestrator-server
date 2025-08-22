@@ -1,0 +1,44 @@
+{
+  "genesis": {
+    "config": {
+      "chainId": 1337,
+      "homesteadBlock": 0,
+      "eip150Block": 0,
+      "eip155Block": 0,
+      "eip158Block": 0,
+      "byzantiumBlock": 0,
+      "constantinopleBlock": 0,
+      "petersburgBlock": 0,
+      "istanbulBlock": 0,
+      "berlinBlock": 0,
+      "londonBlock": 0,
+      "parisBlock": 0,
+      "cancunTime": 0,
+      "zeroBaseFee": true,
+      "qbft": {
+        "blockperiodseconds": 2,
+        "epochlength": 30000,
+        "requesttimeoutseconds": 4
+      }
+    },
+    "nonce": "0x0",
+    "timestamp": "0x0",
+    "gasLimit": "0x1C9C380",
+    "difficulty": "0x1",
+    "mixHash": "0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365",
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "alloc": {
+      "0xc31F3d40e23468c47099C9c50443f9c7D4eE1F7A": {
+        "balance": "0x3635C9ADC5DEA00000"
+      }
+    }
+  },
+  "blockchain": {
+    "nodes": {
+      "generate": true,
+      "count": 5,
+      "type": "validator"
+    }
+  }
+}
+

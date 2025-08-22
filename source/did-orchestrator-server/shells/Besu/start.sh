@@ -66,18 +66,12 @@ eval $command
 if [ $? -eq 200 ]; then
     echo "starting checked"
 else
-    echo "Contract deployment required. Starting new deployment..."
-
-    # Run make-account-with-regist-role.js which handles everything
-    echo "Hardhat: Deploying contracts and creating accounts with roles..."
-    DEPLOY_OUTPUT=$(npx hardhat run scripts/deploy-and-make-account-with-regist-role.js --network dev)
-
-    echo "$DEPLOY_OUTPUT"
-
-    # Save the deployment output to besu.dat
-    echo "$DEPLOY_OUTPUT" > "$ACCOUNT_INFO_PATH"
-
-    echo "Chaincode initialization is not required."
+  echo "Contract deployment required. Starting new deployment..."
+  echo "Hardhat: Deploying contracts and creating accounts with roles..."
+  DEPLOY_OUTPUT=$(npx hardhat run scripts/deploy-and-make-account-with-regist-role.js --network dev)
+  echo "$DEPLOY_OUTPUT"
+  echo "$DEPLOY_OUTPUT" > "$ACCOUNT_INFO_PATH"
+  echo "Chaincode initialization is not required."
 fi
 
 cd ..
