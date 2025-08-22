@@ -99,6 +99,7 @@ services:
       - validator4-data:/opt/besu/data
     networks:
       besu:
+        ipv4_address: 172.28.0.6
 
   validator5:
     image: hyperledger/besu:latest
@@ -115,7 +116,7 @@ services:
       - validator5-data:/opt/besu/data
     networks:
       besu:
-        ipv4_address: 172.28.0.6
+        ipv4_address: 172.28.0.7
 
 networks:
   besu:
