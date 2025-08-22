@@ -157,4 +157,3 @@ volumes:
       type: "local"
       o: "bind,nolock,soft,rw,uid=1000,gid=1000"
       device: $PWD/${VALIDATOR5_DATA_PATH}
-  bootnode_enode: {}
